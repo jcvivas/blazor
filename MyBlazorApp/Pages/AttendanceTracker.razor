@@ -1,0 +1,26 @@
+using BlazorApp.Data;
+@inject AppState AppState
+
+<h3>Attendance Tracker</h3>
+<ul>
+    @foreach (var attendee in AppState.Attendees)
+    {
+        <li>@attendee</li>
+    }
+</ul>
+
+<input @bind="newAttendee" placeholder="Add attendee" />
+<button @onclick="AddAttendee">Add</button>
+
+@code {
+    private string newAttendee;
+
+    private void AddAttendee()
+    {
+        if (!string.IsNullOrWhiteSpace(newAttendee))
+        {
+            AppState.Attendees.Add(newAttendee);
+            newAttendee = string.Empty;
+        }
+    }
+}

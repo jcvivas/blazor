@@ -1,0 +1,39 @@
+<EditForm Model="@registration" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label>Name:</label>
+        <InputText @bind-Value="registration.Name" />
+        <ValidationMessage For="@(() => registration.Name)" />
+    </div>
+
+    <div>
+        <label>Email:</label>
+        <InputText @bind-Value="registration.Email" />
+        <ValidationMessage For="@(() => registration.Email)" />
+    </div>
+
+    <button type="submit">Register</button>
+</EditForm>
+
+@if (message != null)
+{
+    <p>@message</p>
+}
+
+@code {
+    private RegistrationModel registration = new();
+    private string message;
+
+    private void HandleValidSubmit()
+    {
+        message = $"Thank you, {registration.Name}, for registering!";
+    }
+
+    public class RegistrationModel
+    {
+        [Required] public string Name { get; set; }
+        [Required, EmailAddress] public string Email { get; set; }
+    }
+}

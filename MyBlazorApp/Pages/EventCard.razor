@@ -1,0 +1,11 @@
+<div class="card">
+    <h3>@EventTitle</h3>
+    <p>@EventDescription</p>
+    <input @bind="EventTitle" placeholder="Edit title" />
+    <input @bind="EventDescription" placeholder="Edit description" />
+</div>
+
+@code {
+    [Parameter] public string EventTitle { get; set; } = "Default Event";
+    [Parameter] public string EventDescription { get; set; } = "Event Details";
+}
